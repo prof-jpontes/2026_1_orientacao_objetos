@@ -5,6 +5,10 @@ public class Guerreiro extends Personagem{
     public Guerreiro(String nome, int forca, int vida) {
         super(nome, forca, vida);
     }
+    public Guerreiro(String nome, int forca, int vida, String arma) {
+        super(nome, forca, vida);
+        this.arma = arma;
+    }
 
     public void setArma(String arma) {
         this.arma = arma;
@@ -16,6 +20,9 @@ public class Guerreiro extends Personagem{
 
     @Override
     public String atacar() {
-        return super.atacar() + " utilizando uma " + this.arma;
+        if(this.arma != null){
+            return super.atacar() + " utilizando uma " + this.arma;
+        }
+        return this.getNome() + " não possui uma arma para atacar!";
     }
 }

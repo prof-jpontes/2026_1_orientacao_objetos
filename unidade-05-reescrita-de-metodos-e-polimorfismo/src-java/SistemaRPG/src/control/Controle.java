@@ -20,6 +20,12 @@ public class Controle {
         personagem = new Guerreiro(nome,forca,vida);
         personagens.put(nome,personagem);
     }
+
+    public void criarGuerreiro(String nome, int forca,int vida, String arma){
+        personagem = new Guerreiro(nome,forca,vida, arma);
+        personagens.put(nome,personagem);
+    }
+    
     public String verAtaque(){
         String ataque = "";
         for(Personagem p : personagens.values()){

@@ -35,4 +35,8 @@ public class Personagem {
         relatorio += "\nVida: " + this.vida;
         return relatorio;
     }
+
+    public String getNome() {
+        return nome;
+    }
 }
