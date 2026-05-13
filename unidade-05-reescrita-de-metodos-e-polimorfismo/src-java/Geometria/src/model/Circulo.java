@@ -6,6 +6,7 @@ public class Circulo extends FigurasGeometricas {
     public Circulo(String cor, double raio) {
         super(cor);
         this.raio = raio;
+        this.tipo = "círculo";
     }
 
     @Override
