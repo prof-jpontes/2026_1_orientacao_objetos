@@ -11,7 +11,7 @@ public class PagamentoCartao extends Pagamento {
 
     @Override
     public double calcularTaxa() {
-        return getValor() * 0.05 * numeroParcelas;
+        return getValor() * 0.05 * (numeroParcelas - 1);
     }
 
     public double calcularValorParcela() {
@@ -20,5 +20,13 @@ public class PagamentoCartao extends Pagamento {
 
     public int getNumeroParcelas() {
         return numeroParcelas;
+    }
+
+    @Override
+    public String toString() {
+        String s = "PAGAMENTO COM CARTÃO";
+        s += "\n" + super.toString();
+        s += "\n" + "Número de parcelas: " + getNumeroParcelas();
+        return s;
     }
 }

@@ -1,6 +1,6 @@
 package model;
 
-public class Pagamento {
+public abstract class Pagamento {
 
     private String descricao;
     private double valor;
@@ -10,18 +10,26 @@ public class Pagamento {
         this.valor = valor;
     }
 
-    public double calcularTaxa() {
-        return 0.0;
-    }
+    public abstract double calcularTaxa();
 
     public double calcularTotal() {
         return valor + calcularTaxa();
     }
 
+    public double getValor() {
+        return valor;
+    }
+
     public String getDescricao() {
         return descricao;
     }
-    public double getValor() {
-        return valor;
+
+    @Override
+    public String toString() {
+        String s = "\n" + "Descrição: " + getDescricao();
+        s += "\n" + "Valor: " + String.format("%.2f",getValor());
+        s += "\n" + "Taxa: R$ " + String.format("%.2f",calcularTaxa());
+        s += "\n" + "Total do pagamento: R$ " + String.format("%.2f",calcularTotal());
+        return s;
     }
 }

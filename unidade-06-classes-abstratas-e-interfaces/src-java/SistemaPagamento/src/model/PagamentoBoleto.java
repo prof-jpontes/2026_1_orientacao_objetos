@@ -17,4 +17,12 @@ public class PagamentoBoleto extends Pagamento {
     public String getDataVencimento() {
         return dataVencimento;
     }
+
+    @Override
+    public String toString() {
+        String s = "PAGAMENTO COM BOLETO";
+        s += "\n" + super.toString();
+        s += "\n" + "Data de vencimento: " + getDataVencimento();
+        return s;
+    }
 }
