@@ -4,7 +4,7 @@ public class PagamentoCartao extends Pagamento {
 
     private int numeroParcelas;
 
-    public PagamentoCartao(String descricao, double valor, int numeroParcelas) {
+    public PagamentoCartao(String descricao, double valor, int  numeroParcelas) {
         super(descricao, valor);
         this.numeroParcelas = numeroParcelas;
     }
@@ -24,7 +24,7 @@ public class PagamentoCartao extends Pagamento {
 
     @Override
     public String toString() {
-        String s = "PAGAMENTO COM CARTÃO";
+        String s = "\nPAGAMENTO COM CARTÃO";
         s += "\n" + super.toString();
         s += "\n" + "Número de parcelas: " + getNumeroParcelas();
         return s;

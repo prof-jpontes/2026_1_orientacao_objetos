@@ -11,7 +11,7 @@ public class PagamentoPix extends Pagamento {
 
     @Override
     public double calcularTaxa() {
-        return - this.getValor() * 0.05;
+        return 0;
     }
 
     public String getChavePix() {
@@ -19,8 +19,13 @@ public class PagamentoPix extends Pagamento {
     }
 
     @Override
+    public double calcularTotal() {
+        return this.getValor() * 0.95;
+    }
+
+    @Override
     public String toString() {
-        String s = "PAGAMENTO POR PIX";
+        String s = "\nPAGAMENTO POR PIX";
         s += "\n" + super.toString();
         s += "\n" + "Chave: " + getChavePix() + "\n";
         return s;

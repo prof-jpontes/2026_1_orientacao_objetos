@@ -26,7 +26,7 @@ public abstract class Pagamento {
 
     @Override
     public String toString() {
-        String s = "\n" + "Descrição: " + getDescricao();
+        String s = "Descrição: " + getDescricao();
         s += "\n" + "Valor: " + String.format("%.2f",getValor());
         s += "\n" + "Taxa: R$ " + String.format("%.2f",calcularTaxa());
         s += "\n" + "Total do pagamento: R$ " + String.format("%.2f",calcularTotal());
