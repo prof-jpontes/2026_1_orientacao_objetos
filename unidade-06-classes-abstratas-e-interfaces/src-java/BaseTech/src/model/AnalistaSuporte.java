@@ -4,7 +4,7 @@ public class AnalistaSuporte extends Funcionario{
 
     private int chamadosResolvidos;
     private double adicionalChamadosResolvidos;
-    public AnalistaSuporte(String nome, double salario, String cpf, int adicionalChamadosResolvidos) {
+    public AnalistaSuporte(String nome, double salario, String cpf, double adicionalChamadosResolvidos) {
         super(nome, salario, cpf);
         this.chamadosResolvidos = 0;
         this.adicionalChamadosResolvidos = adicionalChamadosResolvidos;
