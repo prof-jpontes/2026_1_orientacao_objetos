@@ -86,6 +86,10 @@ public class FuncionarioView {
                 System.out.print("Informe o CPF: ");
                 System.out.println(control.getRelatorioFuncionario(teclado.nextLine()));
                 break;
+            case 7:
+                System.out.print("Informe o CPF do analista: ");
+                System.out.println(control.registrarAtedimentoChamado(teclado.nextLine()));
+                break;
             case 0:
                 System.out.println("Você escolheu sair do sistema!");
                 break;
@@ -105,6 +109,7 @@ public class FuncionarioView {
         System.out.println("4- Mostrar a folha de pagamento.");
         System.out.println("5- Mostrar relatório de todos os funcionários.");
         System.out.println("6- Mostrar relatório de um funcionário.");
+        System.out.println("7- Registrar atendimento de chamado.");
         System.out.println("0- Sair do sistema.");
         System.out.print("Opção: ");
 

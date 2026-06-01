@@ -48,6 +48,20 @@ public class ControllerFuncionario {
         return s;
     }
     public String getRelatorioFuncionario(String cpf){
-        return funcionarioMap.get(cpf).toString();
+        if(funcionarioMap.get(cpf) != null){
+            return funcionarioMap.get(cpf).toString();
+        }
+        return "Funcionário não localizado!";
+    }
+
+    public String registrarAtedimentoChamado(String cpf){
+        if(funcionarioMap.get(cpf) == null){
+            return "Funcionário não localizado!";
+        }
+        if(funcionarioMap.get(cpf) instanceof AnalistaSuporte){
+            ((AnalistaSuporte) funcionarioMap.get(cpf)).registrarAtendimento();
+            return "Atendimento realizado!";
+        }
+        return "Este funcionário não pode realizar o atendimento!";
     }
 }

@@ -14,4 +14,8 @@ public class AnalistaSuporte extends Funcionario{
     public double getVencimentoMensal() {
         return this.getSalario() + this.chamadosResolvidos * this.adicionalChamadosResolvidos;
     }
+
+    public void registrarAtendimento(){
+        this.chamadosResolvidos++;
+    }
 }
