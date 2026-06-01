@@ -5,7 +5,7 @@
 import control.ControllerFuncionario;
 import view.FuncionarioView;
 
-public static void main(String[] args) {
+public static void main(String[] args) throws IOException, InterruptedException {
     FuncionarioView view = new FuncionarioView(new ControllerFuncionario());
     view.iniciar();
 }

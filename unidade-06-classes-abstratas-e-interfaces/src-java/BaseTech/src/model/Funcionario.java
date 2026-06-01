@@ -19,4 +19,13 @@ public abstract  class Funcionario {
     }
 
     public abstract double getVencimentoMensal();
+
+    @Override
+    public String toString() {
+        String s = "\nNome: " + this.nome;
+        s += "\nCPF: " + this.cpf;
+        s += "\nSalário: R$ " + this.salario;
+        s += "\nVecimento mensal: R$ " + this.getVencimentoMensal();
+        return s;
+    }
 }

@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ControllerFuncionario {
-    Map<String, Funcionario> funcionarioMap = new HashMap<>();
+    private Map<String, Funcionario> funcionarioMap = new HashMap<>();
     public boolean cadastrarDesenvolvedor(String nome, String cpf, double salario, double bonus){
         if(funcionarioMap.get(cpf) == null){
             Funcionario f = new Desenvolvedor(nome,salario,cpf,bonus);
@@ -38,5 +38,16 @@ public class ControllerFuncionario {
             total += f.getVencimentoMensal();
         }
         return total;
+    }
+
+    public String getRelatorioFuncionario(){
+        String s = "";
+        for(Funcionario f : funcionarioMap.values()){
+            s += f.toString() + "\n";
+        }
+        return s;
+    }
+    public String getRelatorioFuncionario(String cpf){
+        return funcionarioMap.get(cpf).toString();
     }
 }
