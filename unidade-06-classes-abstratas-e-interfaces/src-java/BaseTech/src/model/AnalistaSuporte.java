@@ -1,8 +1,9 @@
 package model;
 
-public class AnalistaSuporte extends Funcionario{
+public class AnalistaSuporte extends Funcionario implements Autenticavel{
 
     private int chamadosResolvidos;
+    private  String senha;
     private double adicionalChamadosResolvidos;
     public AnalistaSuporte(String nome, double salario, String cpf, double adicionalChamadosResolvidos) {
         super(nome, salario, cpf);
@@ -17,5 +18,10 @@ public class AnalistaSuporte extends Funcionario{
 
     public void registrarAtendimento(){
         this.chamadosResolvidos++;
+    }
+
+    @Override
+    public boolean autenticar(String senha) {
+        return this.senha.equals(senha);
     }
 }

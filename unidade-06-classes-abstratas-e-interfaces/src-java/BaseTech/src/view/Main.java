@@ -2,10 +2,11 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 
-import control.ControllerFuncionario;
+import control.Controller;
 import view.FuncionarioView;
 
 public static void main(String[] args) throws IOException, InterruptedException {
-    FuncionarioView view = new FuncionarioView(new ControllerFuncionario());
+    FuncionarioView view = new FuncionarioView(new Controller());
     view.iniciar();
 }
+

@@ -5,6 +5,7 @@ public abstract  class Funcionario {
     private double salario;
     private String cpf;
 
+
     public Funcionario(String nome, double salario, String cpf){
         this.nome = nome;
         this.salario = salario;
@@ -19,6 +20,7 @@ public abstract  class Funcionario {
     }
 
     public abstract double getVencimentoMensal();
+
 
     @Override
     public String toString() {

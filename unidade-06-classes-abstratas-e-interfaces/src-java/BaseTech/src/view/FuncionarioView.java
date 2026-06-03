@@ -1,18 +1,16 @@
 package view;
 
-import control.ControllerFuncionario;
+import control.Controller;
 
 import java.io.IOException;
-import java.time.Duration;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class FuncionarioView {
 
-    private final ControllerFuncionario control;
+    private final Controller control;
     private final Scanner teclado;
 
-    public FuncionarioView(ControllerFuncionario control) {
+    public FuncionarioView(Controller control) {
         this.control = control;
         this.teclado = new Scanner(System.in);
     }
@@ -90,6 +88,13 @@ public class FuncionarioView {
                 System.out.print("Informe o CPF do analista: ");
                 System.out.println(control.registrarAtedimentoChamado(teclado.nextLine()));
                 break;
+            case 8:
+                System.out.print("Login: ");
+                String login = teclado.nextLine();
+                System.out.print("Senha: ");
+                String senha = teclado.nextLine();
+                System.out.println(control.login(login,senha));
+                break;
             case 0:
                 System.out.println("Você escolheu sair do sistema!");
                 break;
@@ -110,6 +115,7 @@ public class FuncionarioView {
         System.out.println("5- Mostrar relatório de todos os funcionários.");
         System.out.println("6- Mostrar relatório de um funcionário.");
         System.out.println("7- Registrar atendimento de chamado.");
+        System.out.println("8- Realizar login.");
         System.out.println("0- Sair do sistema.");
         System.out.print("Opção: ");
 
