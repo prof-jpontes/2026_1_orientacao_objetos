@@ -1,12 +1,18 @@
 package model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SistemaInterno {
 
+    private Map<String, Autenticavel> autenticavelMap = new HashMap<>();
 
-    public static boolean login(Autenticavel a, String senha){
-        if(a.autenticar(senha)){
-            return true;
-        }
-        return false;
+    public void cadastrar(String cpf, Autenticavel a){
+        this.autenticavelMap.put(cpf, a);
+    }
+
+    public boolean login(String usuario, String senha){
+        if(!this.autenticavelMap.containsKey(usuario)) return false;
+        return (autenticavelMap.get(usuario).autenticar(senha));
     }
 }

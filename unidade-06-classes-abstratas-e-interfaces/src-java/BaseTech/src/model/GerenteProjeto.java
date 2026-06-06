@@ -1,9 +1,9 @@
 package model;
 
-public class GerenteProjeto extends Funcionario implements Autenticavel{
+public class GerenteProjeto extends FuncionarioAutenticavel{
 
     private final double perBonificacao = 0.20;
-    private String senha;
+
     public GerenteProjeto(String nome, double salario, String cpf) {
         super(nome, salario, cpf);
     }
@@ -14,8 +14,4 @@ public class GerenteProjeto extends Funcionario implements Autenticavel{
         return this.getSalario() + this.perBonificacao * this.getSalario();
     }
 
-    @Override
-    public boolean autenticar(String senha) {
-        return this.senha.equals(senha);
-    }
 }

@@ -7,33 +7,32 @@ import java.util.Map;
 
 public class Controller {
     private Map<String, Funcionario> funcionarioMap = new HashMap<>();
-    private Map<String, Autenticavel> autenticavelMap = new HashMap<>();
-    public boolean cadastrarDesenvolvedor(String nome, String cpf, double salario, double bonus){
-        if(funcionarioMap.get(cpf) == null){
-            Funcionario f = new Desenvolvedor(nome,salario,cpf,bonus);
-            funcionarioMap.put(cpf,f);
-            autenticavelMap.put(cpf,(Autenticavel) f);
-            return true;
+    private SistemaInterno si = new SistemaInterno();
+
+
+    private void cadastrarFuncionario(Funcionario f){
+        funcionarioMap.put(f.getCpf(), f);
+        if(f instanceof Autenticavel){
+            si.cadastrar(f.getCpf(), (Autenticavel) f);
         }
-        return false;
+    }
+
+    public boolean cadastrarDesenvolvedor(String nome, String cpf, double salario, double bonus){
+        if(this.funcionarioMap.containsKey(cpf)) return false;
+
+        this.cadastrarFuncionario(new Desenvolvedor(nome, salario, cpf, bonus));
+        return true;
     }
     public boolean cadastrarAnalistaSuporte(String nome, String cpf, double salario, double acr){
-        if(funcionarioMap.get(cpf) == null){
-            Funcionario f = new AnalistaSuporte(nome,salario,cpf,acr);
-            funcionarioMap.put(cpf,f);
-            autenticavelMap.put(cpf,(Autenticavel) f);
-            return true;
-        }
-        return false;
+        if(funcionarioMap.containsKey(cpf)) return false;
+        this.cadastrarFuncionario(new AnalistaSuporte(nome, salario, cpf, acr));
+        return true;
+
     }
     public boolean cadastrarGerenteProjeto(String nome, String cpf, double salario){
-        if(funcionarioMap.get(cpf) == null){
-            Funcionario f = new GerenteProjeto(nome,salario,cpf);
-            funcionarioMap.put(cpf,f);
-            autenticavelMap.put(cpf,(Autenticavel) f);
-            return true;
-        }
-        return false;
+        if(this.funcionarioMap.containsKey(cpf)) return false;
+        this.cadastrarFuncionario(new GerenteProjeto(nome, salario, cpf));
+        return true;
     }
     public double getFolha(){
         double total = 0;
@@ -44,11 +43,12 @@ public class Controller {
     }
 
     public String getRelatorioFuncionario(){
-        String s = "";
+        StringBuilder sb = new StringBuilder();
         for(Funcionario f : funcionarioMap.values()){
-            s += f.toString() + "\n";
+            sb.append(f.toString());
+            sb.append("\n");
         }
-        return s;
+        return sb.toString();
     }
     public String getRelatorioFuncionario(String cpf){
         if(funcionarioMap.get(cpf) != null){
@@ -61,17 +61,12 @@ public class Controller {
         if(funcionarioMap.get(cpf) == null){
             return "Funcionário não localizado!";
         }
-        if(funcionarioMap.get(cpf) instanceof AnalistaSuporte){
-            ((AnalistaSuporte) funcionarioMap.get(cpf)).registrarAtendimento();
-            return "Atendimento realizado!";
-        }
-        return "Este funcionário não pode realizar o atendimento!";
+
+        return this.funcionarioMap.get(cpf).tentarRealizarAtendimento();
     }
 
     public String login(String usuario, String senha){
-        Autenticavel a = this.autenticavelMap.get(usuario);
-        if(a == null)return "Usuário ou senha incorreto!";
-        if(SistemaInterno.login(a,senha))return "Login realizado!";
-        return "Usuário ou senha incorreto!";
+        if(si.login(usuario, senha)) return "Login realizado!";
+        return "Usuário ou senha incorretos!";
     }
 }

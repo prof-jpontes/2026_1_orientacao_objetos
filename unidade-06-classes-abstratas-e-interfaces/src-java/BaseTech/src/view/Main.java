@@ -1,12 +1,12 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-
-
+package view;
 import control.Controller;
-import view.FuncionarioView;
 
-public static void main(String[] args) throws IOException, InterruptedException {
-    FuncionarioView view = new FuncionarioView(new Controller());
-    view.iniciar();
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException, IOException {
+        FuncionarioView view = new FuncionarioView(new Controller());
+        view.iniciar();
+    }
 }
 

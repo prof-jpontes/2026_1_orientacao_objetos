@@ -19,7 +19,6 @@ public class FuncionarioView {
         do{
             System.out.print("Pressione enter para continuar. ");
             teclado.nextLine();
-            limparConsole();
             exibirMenu();
             opcao = Byte.parseByte(teclado.nextLine());
             processarOpcao(opcao);
@@ -75,7 +74,7 @@ public class FuncionarioView {
                 }
                 break;
             case 4:
-                System.out.println("Folha de pagamento: R$ " + control.getFolha());
+                System.out.println("Folha de pagamento: R$ " + String.format("%.2f", control.getFolha()));
                 break;
             case 5:
                 System.out.println(control.getRelatorioFuncionario());
@@ -119,15 +118,5 @@ public class FuncionarioView {
         System.out.println("0- Sair do sistema.");
         System.out.print("Opção: ");
 
-    }
-
-    public static void limparConsole() throws InterruptedException, IOException {
-        final String os = System.getProperty("os.name");
-        if(os.contains("Windows")){
-            new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
-        }
-        else{
-            new ProcessBuilder("clear").inheritIO().start().waitFor();
-        }
     }
 }

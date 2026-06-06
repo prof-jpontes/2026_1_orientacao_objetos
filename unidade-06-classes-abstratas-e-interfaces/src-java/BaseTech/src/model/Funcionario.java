@@ -21,13 +21,20 @@ public abstract  class Funcionario {
 
     public abstract double getVencimentoMensal();
 
+    public String tentarRealizarAtendimento(){
+        return "Este funcionário não pode realizar atendimento!";
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
 
     @Override
     public String toString() {
         String s = "\nNome: " + this.nome;
         s += "\nCPF: " + this.cpf;
-        s += "\nSalário: R$ " + this.salario;
-        s += "\nVecimento mensal: R$ " + this.getVencimentoMensal();
+        s += "\nSalário: R$ " + String.format("%.2f",this.salario);
+        s += "\nVecimento mensal: R$ " + String.format("%.2f",this.getVencimentoMensal());
         return s;
     }
 }
