@@ -1,6 +1,6 @@
 package model;
 
-public abstract class FuncionarioAutenticavel extends Funcionario implements Autenticavel{
+public class FuncionarioAutenticavel extends Funcionario implements Autenticavel{
     private  String senha;
     public FuncionarioAutenticavel(String nome, double salario, String cpf) {
         super(nome, salario, cpf);

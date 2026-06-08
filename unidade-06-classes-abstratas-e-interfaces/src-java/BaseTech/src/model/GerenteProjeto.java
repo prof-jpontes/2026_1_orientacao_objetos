@@ -1,17 +1,16 @@
 package model;
 
-public class GerenteProjeto extends FuncionarioAutenticavel{
+public class GerenteProjeto implements Tipo {
 
-    private final double perBonificacao = 0.20;
-
-    public GerenteProjeto(String nome, double salario, String cpf) {
-        super(nome, salario, cpf);
-    }
-
+    private static final double PERCENTUAL = 0.20;
 
     @Override
-    public double getVencimentoMensal() {
-        return this.getSalario() + this.perBonificacao * this.getSalario();
+    public String getDescricao() {
+        return "Gerente de Projeto";
     }
 
+    @Override
+    public double calcularAdicional(double salarioBase) {
+        return PERCENTUAL * salarioBase;
+    }
 }

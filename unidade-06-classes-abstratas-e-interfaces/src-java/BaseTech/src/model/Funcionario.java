@@ -1,16 +1,30 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract  class Funcionario {
     private String nome;
     private double salario;
     private String cpf;
-
+    private List<Tipo> tipos = new ArrayList<>();
 
     public Funcionario(String nome, double salario, String cpf){
         this.nome = nome;
         this.salario = salario;
         this.cpf = cpf;
     }
+
+    public void adicionarTipo(Tipo t){
+        this.tipos.add(t);
+    }
+
+    public void removerTipo(Tipo t){
+        this.tipos.remove(t);
+    }
+
+
+
     public String getNome() {
         return nome;
     }
@@ -19,9 +33,18 @@ public abstract  class Funcionario {
         return salario;
     }
 
-    public abstract double getVencimentoMensal();
+    public double getVencimentoMensal(){
+        double total = this.salario;
+        for(Tipo t : tipos){
+            total += t.calcularAdicional(this.salario);
+        }
+        return total;
+    }
 
     public String tentarRealizarAtendimento(){
+        for(Tipo t : tipos){
+            if(t instanceof AnalistaSuporte)return "Atendimento registrado!";
+        }
         return "Este funcionário não pode realizar atendimento!";
     }
 

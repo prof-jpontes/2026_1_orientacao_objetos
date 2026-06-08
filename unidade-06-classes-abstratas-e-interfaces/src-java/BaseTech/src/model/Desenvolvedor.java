@@ -1,17 +1,25 @@
 package model;
 
-public class Desenvolvedor extends FuncionarioAutenticavel{
+public class Desenvolvedor implements Tipo{
 
-    private double bonus;
+    private Nivel nivel;
 
-    public Desenvolvedor(String nome, double salario, String cpf, double bonus) {
-        super(nome, salario, cpf);
-        this.bonus = bonus;
+    public Desenvolvedor(Nivel nivel) {
+        this.nivel = nivel;
     }
 
     @Override
-    public double getVencimentoMensal() {
-        return this.getSalario() + this.bonus;
+    public String getDescricao() {
+        return "Desenvolvedor";
+    }
+
+    @Override
+    public double calcularAdicional(double salarioBase) {
+        return this.nivel.getBonus();
+    }
+
+    public void promover(Nivel novoNivel){
+        this.nivel = novoNivel;
     }
 
 }

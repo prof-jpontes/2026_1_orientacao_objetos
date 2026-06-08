@@ -17,22 +17,15 @@ public class Controller {
         }
     }
 
-    public boolean cadastrarDesenvolvedor(String nome, String cpf, double salario, double bonus){
+    public boolean cadastrarFuncionarioAutenticavel(String nome, double salario, String cpf){
         if(this.funcionarioMap.containsKey(cpf)) return false;
 
-        this.cadastrarFuncionario(new Desenvolvedor(nome, salario, cpf, bonus));
+        this.cadastrarFuncionario(new FuncionarioAutenticavel(nome,salario,cpf));
         return true;
     }
-    public boolean cadastrarAnalistaSuporte(String nome, String cpf, double salario, double acr){
-        if(funcionarioMap.containsKey(cpf)) return false;
-        this.cadastrarFuncionario(new AnalistaSuporte(nome, salario, cpf, acr));
-        return true;
 
-    }
-    public boolean cadastrarGerenteProjeto(String nome, String cpf, double salario){
-        if(this.funcionarioMap.containsKey(cpf)) return false;
-        this.cadastrarFuncionario(new GerenteProjeto(nome, salario, cpf));
-        return true;
+    public void adicionarTipo(String chave, Tipo t){
+        this.funcionarioMap.get(chave).adicionarTipo(t);
     }
     public double getFolha(){
         double total = 0;

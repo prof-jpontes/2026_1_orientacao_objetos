@@ -1,23 +1,25 @@
 package model;
 
-public class AnalistaSuporte extends FuncionarioAutenticavel{
+public class AnalistaSuporte implements  Tipo{
 
     private int chamadosResolvidos;
     private double adicionalChamadosResolvidos;
-    public AnalistaSuporte(String nome, double salario, String cpf, double adicionalChamadosResolvidos) {
-        super(nome, salario, cpf);
-        this.chamadosResolvidos = 0;
-        this.adicionalChamadosResolvidos = adicionalChamadosResolvidos;
+
+
+    public AnalistaSuporte(double adicionalChamadosResolvidos) {
+        this.adicionalChamadosResolvidos = adicionalChamadosResolvidos = 0;
     }
 
     @Override
-    public double getVencimentoMensal() {
-        return this.getSalario() + this.chamadosResolvidos * this.adicionalChamadosResolvidos;
+    public String getDescricao() {
+        return "Chamados Resolvidos";
     }
 
     @Override
-    public String tentarRealizarAtendimento() {
-        this.chamadosResolvidos++;
-        return "Atendimento realizado com sucesso";
+    public double calcularAdicional(double salarioBase) {
+        return chamadosResolvidos * adicionalChamadosResolvidos;
+    }
+    public void registrarAtendimento(){
+        chamadosResolvidos++;
     }
 }
