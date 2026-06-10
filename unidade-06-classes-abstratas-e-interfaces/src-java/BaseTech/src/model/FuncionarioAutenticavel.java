@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FuncionarioAutenticavel extends Funcionario implements Autenticavel{
     private  String senha;
     public FuncionarioAutenticavel(String nome, double salario, String cpf) {

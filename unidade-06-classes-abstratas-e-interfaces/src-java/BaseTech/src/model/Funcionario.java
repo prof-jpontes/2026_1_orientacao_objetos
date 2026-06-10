@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract  class Funcionario {
+public class Funcionario implements Remuneravel {
     private String nome;
     private double salario;
     private String cpf;
@@ -16,6 +16,11 @@ public abstract  class Funcionario {
     }
 
     public void adicionarTipo(Tipo t){
+        for(Tipo i : tipos){
+            if(i.getDescricao().equals(t.getDescricao())){
+                return;
+            }
+        }
         this.tipos.add(t);
     }
 
@@ -43,7 +48,10 @@ public abstract  class Funcionario {
 
     public String tentarRealizarAtendimento(){
         for(Tipo t : tipos){
-            if(t instanceof AnalistaSuporte)return "Atendimento registrado!";
+            if(t instanceof AnalistaSuporte){
+                ((AnalistaSuporte) t).registrarAtendimento();
+                return "Atendimento registrado!";
+            }
         }
         return "Este funcionário não pode realizar atendimento!";
     }

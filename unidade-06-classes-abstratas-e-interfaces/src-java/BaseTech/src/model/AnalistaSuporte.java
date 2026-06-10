@@ -7,7 +7,8 @@ public class AnalistaSuporte implements  Tipo{
 
 
     public AnalistaSuporte(double adicionalChamadosResolvidos) {
-        this.adicionalChamadosResolvidos = adicionalChamadosResolvidos = 0;
+        this.chamadosResolvidos = 0;
+        this.adicionalChamadosResolvidos = adicionalChamadosResolvidos;
     }
 
     @Override

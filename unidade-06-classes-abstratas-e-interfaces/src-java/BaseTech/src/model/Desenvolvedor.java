@@ -18,8 +18,9 @@ public class Desenvolvedor implements Tipo{
         return this.nivel.getBonus();
     }
 
-    public void promover(Nivel novoNivel){
-        this.nivel = novoNivel;
+    public void promover(){
+        if(this.nivel == Nivel.JUNIOR)this.nivel = Nivel.PLENO;
+        else this.nivel = Nivel.SENIOR;
     }
 
 }
