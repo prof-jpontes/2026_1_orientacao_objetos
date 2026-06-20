@@ -1,5 +1,3 @@
-<h1 style="text-align:center;">Instituto Federal do Acre</h1>
-
 # Instituto Federal do Acre
 # Campus Rio Branco
 # Curso de Sistemas para Internete
