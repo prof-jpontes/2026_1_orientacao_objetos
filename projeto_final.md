@@ -1,3 +1,5 @@
+<h1 style="text-align:center;">Instituto Federal do Acre</h1>
+
 # Instituto Federal do Acre
 # Campus Rio Branco
 # Curso de Sistemas para Internete
@@ -10,15 +12,15 @@ Aplicar os conceitos discutidos durante a disciplina de Orientação a Objetos, 
 
 ---
 
-## Tema do Projeto
+### Tema do Projeto
 
 O grupo deve identificar um problema do mundo real e propor uma solução automatizada por meio de um sistema orientado a objetos. 
 
 ---
 
-## 📄 Entregáveis
+### 📄 Entregáveis
 
-### 1. Documentação
+#### 1. Documentação
 
 A documentação deve ser entregue em formato PDF ou arquivo de markdown e conter:
 - **Título do projeto**
@@ -36,7 +38,7 @@ Não há um template padrão para este documento, mas o grupo deve apresentar um
 
 ---
 
-### 2. Protótipo funcional (código)
+#### 2. Protótipo funcional (código)
 
 - Linguagem: Java
 - Armazenamento: simulação de persistência de dados em mapas ou listas.
@@ -49,7 +51,7 @@ Não há um template padrão para este documento, mas o grupo deve apresentar um
   - Uso de coleções (`List`, `Map`, etc. se fizer sentido);
   - Lançamento e tratamento de exceções, com ao menos dois tipos de exceções customizadas.
 
-#### Organização sugerida de pacotes:
+### Organização sugerida de pacotes:
 
 O projeto deve estar organizado em pacotes, de acordo com a necessidade do projeto. Um sugestão de árvore do projeto é a seguinte:
 ```textplan
@@ -64,7 +66,7 @@ persistencia/ → CRUD simulado
 
 ---
 
-### 3. Apresentação
+### Apresentação
 
 Cada grupo deverá apresentar o projeto na forma de seminário, com duração máxima de 30 minutos.
 
@@ -77,12 +79,12 @@ A apresentação deve incluir:
 
 ---
 
-## Data de Entrega
+### Data de Entrega
 
 **Todos os materiais deverão ser entregues no dia 06/07/2026.**
 
 O grupo deverá publicar o projeto no GitHub, incluindo um arquivo `README.md` com instruções de execução do sistema. O projeto deve ser público para consulta, com o link compartilhado com o professor como resposta ao trabalho da disciplina no Suap.
 
-## Avaliação
+### Avaliação
 
 Esse projeto contempla duas das três avaliações da etapa 2 da disciplina de Orientação a Objetos. As entregas da documentação e do protótipo funcional forma uma avaliação, que tem nota em grupo. A apresentação é outra avaliação, sendo esta individual. 
