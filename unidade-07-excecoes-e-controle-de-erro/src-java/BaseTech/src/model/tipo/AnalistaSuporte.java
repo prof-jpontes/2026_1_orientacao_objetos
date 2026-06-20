@@ -1,6 +1,8 @@
-package model;
+package model.tipo;
 
-public class AnalistaSuporte implements  Tipo{
+import model.tipo.Tipo;
+
+public class AnalistaSuporte implements Tipo {
 
     private int chamadosResolvidos;
     private double adicionalChamadosResolvidos;

@@ -1,4 +1,4 @@
-package model;
+package model.tipo;
 
 public interface Tipo {
     String getDescricao();

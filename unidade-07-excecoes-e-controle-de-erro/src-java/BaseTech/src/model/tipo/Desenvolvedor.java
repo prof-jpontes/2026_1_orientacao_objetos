@@ -1,6 +1,6 @@
-package model;
+package model.tipo;
 
-public class Desenvolvedor implements Tipo{
+public class Desenvolvedor implements Tipo {
 
     private Nivel nivel;
 

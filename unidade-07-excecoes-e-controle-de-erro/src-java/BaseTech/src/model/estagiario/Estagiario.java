@@ -1,7 +1,9 @@
-package model;
+package model.estagiario;
 
 
-public class Estagiario implements Remuneravel{
+import model.Remuneravel;
+
+public class Estagiario implements Remuneravel {
     private String nome;
     private String email;
     private double bolsa;

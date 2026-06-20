@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException, IOException {
-        FuncionarioView view = new FuncionarioView(new Controller());
+        BaseTechView view = new BaseTechView(new Controller());
         view.iniciar();
     }
 }

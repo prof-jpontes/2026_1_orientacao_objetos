@@ -1,4 +1,8 @@
-package model;
+package model.funcionario;
+
+import model.tipo.AnalistaSuporte;
+import model.Remuneravel;
+import model.tipo.Tipo;
 
 import java.util.ArrayList;
 import java.util.List;

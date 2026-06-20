@@ -1,6 +1,8 @@
-package model;
+package model.cliente;
 
-public class Cliente implements Autenticavel{
+import model.Autenticavel;
+
+public class Cliente implements Autenticavel {
     private String nome;
     private String cpf;
     private String senha;

@@ -1,4 +1,6 @@
-package model;
+package model.tipo;
+
+import model.tipo.Tipo;
 
 public class GerenteProjeto implements Tipo {
 

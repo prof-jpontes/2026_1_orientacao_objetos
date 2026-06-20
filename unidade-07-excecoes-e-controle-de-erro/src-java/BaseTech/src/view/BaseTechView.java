@@ -1,70 +1,90 @@
 package view;
 
 import control.Controller;
-import model.AnalistaSuporte;
-import model.Desenvolvedor;
-import model.GerenteProjeto;
-import model.Nivel;
+import model.tipo.AnalistaSuporte;
+import model.tipo.Desenvolvedor;
+import model.tipo.GerenteProjeto;
+import model.tipo.Nivel;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-public class FuncionarioView {
+public class BaseTechView {
 
     private final Controller control;
     private final Scanner teclado;
 
-    public FuncionarioView(Controller control) {
+    public BaseTechView(Controller control) {
         this.control = control;
         this.teclado = new Scanner(System.in);
     }
-    public void iniciar() throws IOException, InterruptedException {
+
+    public void iniciar() {
         byte opcao;
-        do{
+        do {
             System.out.print("Pressione enter para continuar. ");
             teclado.nextLine();
             exibirMenu();
-            opcao = Byte.parseByte(teclado.nextLine());
-            processarOpcao(opcao);
-        }while(opcao != 0);
+            try {
+                opcao = Byte.parseByte(teclado.nextLine());
+                processarOpcao(opcao);
+            } catch (NumberFormatException e) {
+                System.out.println("Opção inválida! Digete um número inteiro menor do que 128");
+            }catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }finally {
+                opcao = -1;
+            }
+
+
+        } while (opcao != 0);
         teclado.close();
     }
 
     private void processarOpcao(byte opcao) {
         String nome, cpf;
-        double salario;
-        switch (opcao){
+        double salario = 0;
+        switch (opcao) {
             case 1:
-                System.out.print("Nome: " );
+                System.out.print("Nome: ");
                 nome = teclado.nextLine();
                 System.out.print("Cpf: ");
                 cpf = teclado.nextLine();
                 System.out.print("Salario: R$ ");
-                salario = Double.parseDouble(teclado.nextLine());
+                boolean leuSalario = false;
+                while (!leuSalario) {
+                    try {
+                        salario = Double.parseDouble(teclado.nextLine());
+                        leuSalario = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Valor inválido! Digete um número real para o salário");
+                    }
+                }
+
                 System.out.println("Tipo de funcionário: ");
                 System.out.println("A - Desenvolvedor\nB - Analista de suporte\nC - Gerente de Projeto\nD - Nenhum");
                 char o = teclado.nextLine().charAt(0);
-                if(o == 'D'){
-                    if(control.cadastrarFuncionario(nome,salario,cpf)){
+                if (o != 'A' && o != 'B' && o != 'C' && o != 'D') {
+                    throw new IllegalArgumentException(
+                            "Caractere inválido: " + o + ". Esperado: A, B, C ou D."
+                    );
+                } else if (o == 'D') {
+                    if (control.cadastrarFuncionario(nome, salario, cpf)) {
                         System.out.println("Funcionário cadastrado com sucesso!");
-                    }
-                    else{
+                    } else {
                         System.out.println("Já existe um funcionário com este CPF!");
                     }
-                }
-                else{
-                    if(control.cadastrarFuncionarioAutenticavel(nome,salario,cpf)) {
+                } else {
+                    if (control.cadastrarFuncionarioAutenticavel(nome, salario, cpf)) {
                         System.out.println("Funcionário cadastrado com sucesso!");
-                        if(o == 'A'){
-                            control.adicionarTipo(cpf,new Desenvolvedor(Nivel.JUNIOR));
+                        if (o == 'A') {
+                            control.adicionarTipo(cpf, new Desenvolvedor(Nivel.JUNIOR));
                         } else if (o == 'B') {
                             control.adicionarTipo(cpf, new AnalistaSuporte(50));
-                        }
-                        else {
+                        } else {
                             control.adicionarTipo(cpf, new GerenteProjeto());
                         }
-                    }
-                    else{
+                    } else {
                         System.out.println("Já existe um funcionário com este CPF!");
                     }
                 }
@@ -72,12 +92,12 @@ public class FuncionarioView {
             case 2:
                 System.out.print("CPF: ");
                 cpf = teclado.nextLine();
-                System.out.println(control.adicionarTipo(cpf,new Desenvolvedor(Nivel.JUNIOR)));
+                System.out.println(control.adicionarTipo(cpf, new Desenvolvedor(Nivel.JUNIOR)));
                 break;
             case 3:
                 System.out.print("CPF: ");
                 cpf = teclado.nextLine();
-                System.out.println( control.adicionarTipo(cpf, new AnalistaSuporte(50)));
+                System.out.println(control.adicionarTipo(cpf, new AnalistaSuporte(50)));
                 break;
             case 4:
                 System.out.print("CPF: ");
@@ -103,7 +123,7 @@ public class FuncionarioView {
                 String login = teclado.nextLine();
                 System.out.print("Senha: ");
                 String senha = teclado.nextLine();
-                System.out.println(control.login(login,senha));
+                System.out.println(control.login(login, senha));
                 break;
             case 10:
                 System.out.print("Nome: ");
@@ -111,10 +131,9 @@ public class FuncionarioView {
                 System.out.print("Email: ");
                 String email = teclado.nextLine();
                 System.out.print("Bolsa: ");
-                if(control.cadastrarEstagiario(nome,email,Double.parseDouble(teclado.nextLine()))){
+                if (control.cadastrarEstagiario(nome, email, Double.parseDouble(teclado.nextLine()))) {
                     System.out.println("Estagiário cadastrado com sucesso!.");
-                }
-                else{
+                } else {
                     System.out.println("Estagiário já existente!.");
                 }
                 break;
@@ -133,7 +152,7 @@ public class FuncionarioView {
         return teclado;
     }
 
-    private void exibirMenu(){
+    private void exibirMenu() {
         System.out.println("\nESCOLHA UMA OPÇÃO!");
         System.out.println("1- Cadastrar um Funcionário.");
         System.out.println("2- Definir como desenvolvedor.");

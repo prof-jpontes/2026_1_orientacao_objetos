@@ -1,6 +1,10 @@
 package control;
 
 import model.*;
+import model.estagiario.Estagiario;
+import model.funcionario.Funcionario;
+import model.funcionario.FuncionarioAutenticavel;
+import model.tipo.Tipo;
 
 import java.util.HashMap;
 import java.util.Map;

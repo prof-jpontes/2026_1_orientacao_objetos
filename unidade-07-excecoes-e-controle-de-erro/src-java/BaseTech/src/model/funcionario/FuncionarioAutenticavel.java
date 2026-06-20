@@ -1,9 +1,9 @@
-package model;
+package model.funcionario;
 
-import java.util.ArrayList;
-import java.util.List;
+import model.Autenticavel;
+import model.funcionario.Funcionario;
 
-public class FuncionarioAutenticavel extends Funcionario implements Autenticavel{
+public class FuncionarioAutenticavel extends Funcionario implements Autenticavel {
     private  String senha;
     public FuncionarioAutenticavel(String nome, double salario, String cpf) {
         super(nome, salario, cpf);
