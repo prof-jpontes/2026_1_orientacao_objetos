@@ -29,14 +29,12 @@ public class BaseTechView {
                 opcao = Byte.parseByte(teclado.nextLine());
                 processarOpcao(opcao);
             } catch (NumberFormatException e) {
-                System.out.println("Opção inválida! Digete um número inteiro menor do que 128");
-            }catch (IllegalArgumentException e){
-                System.out.println(e.getMessage());
-            }finally {
                 opcao = -1;
+                System.out.println("Opção inválida! Digete um número inteiro menor do que 128");
+            }catch (RuntimeException e){
+                opcao = -1;
+                System.out.println(e.getMessage());
             }
-
-
         } while (opcao != 0);
         teclado.close();
     }
@@ -50,14 +48,14 @@ public class BaseTechView {
                 nome = teclado.nextLine();
                 System.out.print("Cpf: ");
                 cpf = teclado.nextLine();
-                System.out.print("Salario: R$ ");
                 boolean leuSalario = false;
                 while (!leuSalario) {
                     try {
+                        System.out.print("Salario: R$ ");
                         salario = Double.parseDouble(teclado.nextLine());
                         leuSalario = true;
                     } catch (NumberFormatException e) {
-                        System.out.println("Valor inválido! Digete um número real para o salário");
+                        System.out.println("Valor inválido! Digite um número real para o salário");
                     }
                 }
 
@@ -69,23 +67,17 @@ public class BaseTechView {
                             "Caractere inválido: " + o + ". Esperado: A, B, C ou D."
                     );
                 } else if (o == 'D') {
-                    if (control.cadastrarFuncionario(nome, salario, cpf)) {
-                        System.out.println("Funcionário cadastrado com sucesso!");
-                    } else {
-                        System.out.println("Já existe um funcionário com este CPF!");
-                    }
+                    control.cadastrarFuncionario(nome, salario, cpf);
+                    System.out.println("Funcionário cadastrado com sucesso!");
                 } else {
-                    if (control.cadastrarFuncionarioAutenticavel(nome, salario, cpf)) {
-                        System.out.println("Funcionário cadastrado com sucesso!");
-                        if (o == 'A') {
-                            control.adicionarTipo(cpf, new Desenvolvedor(Nivel.JUNIOR));
-                        } else if (o == 'B') {
-                            control.adicionarTipo(cpf, new AnalistaSuporte(50));
-                        } else {
-                            control.adicionarTipo(cpf, new GerenteProjeto());
-                        }
-                    } else {
-                        System.out.println("Já existe um funcionário com este CPF!");
+                    control.cadastrarFuncionarioAutenticavel(nome, salario, cpf);
+                    System.out.println("Funcionário cadastrado com sucesso!");
+                    if (o == 'A') {
+                       control.adicionarTipo(cpf, new Desenvolvedor(Nivel.JUNIOR));
+                    } else if (o == 'B') {
+                       control.adicionarTipo(cpf, new AnalistaSuporte(50));
+                    } else{
+                       control.adicionarTipo(cpf, new GerenteProjeto());
                     }
                 }
                 break;
@@ -126,16 +118,12 @@ public class BaseTechView {
                 System.out.println(control.login(login, senha));
                 break;
             case 10:
-                System.out.print("Nome: ");
-                nome = teclado.nextLine();
-                System.out.print("Email: ");
-                String email = teclado.nextLine();
-                System.out.print("Bolsa: ");
-                if (control.cadastrarEstagiario(nome, email, Double.parseDouble(teclado.nextLine()))) {
-                    System.out.println("Estagiário cadastrado com sucesso!.");
-                } else {
-                    System.out.println("Estagiário já existente!.");
-                }
+               try{
+                   this.cadastrarEstagiario(control);
+                   System.out.println("Estagiario cadastrado com sucesso!");
+               }catch(Exception e){
+                   System.out.println(e.getMessage());
+               }
                 break;
             case 0:
                 System.out.println("Você escolheu sair do sistema!");
@@ -143,7 +131,6 @@ public class BaseTechView {
             default:
                 System.out.println("Opção inválida!");
                 break;
-
         }
 
     }
@@ -167,5 +154,20 @@ public class BaseTechView {
         System.out.println("0- Sair do sistema.");
         System.out.print("Opção: ");
 
+    }
+
+    private void cadastrarEstagiario(Controller control){
+        System.out.print("Nome: ");
+        String nome = teclado.nextLine();
+        System.out.print("Email: ");
+        String email = teclado.nextLine();
+        if(!email.contains("@")){
+            throw new IllegalArgumentException("E-mail inválido!");
+        }
+        System.out.print("Bolsa: ");
+        double b = Double.parseDouble(teclado.nextLine());
+        if (!control.cadastrarEstagiario(nome, email, b)) {
+            throw new IllegalArgumentException("Estagiário já cadastrado.");
+        }
     }
 }

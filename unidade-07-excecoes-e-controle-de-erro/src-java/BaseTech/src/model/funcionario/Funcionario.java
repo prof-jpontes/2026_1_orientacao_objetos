@@ -1,5 +1,6 @@
 package model.funcionario;
 
+import model.exception.ValorInvalidoException;
 import model.tipo.AnalistaSuporte;
 import model.Remuneravel;
 import model.tipo.Tipo;
@@ -14,6 +15,9 @@ public class Funcionario implements Remuneravel {
     private List<Tipo> tipos = new ArrayList<>();
 
     public Funcionario(String nome, double salario, String cpf){
+        if(salario < 0 ){
+            throw new ValorInvalidoException("Salário",salario);
+        }
         this.nome = nome;
         this.salario = salario;
         this.cpf = cpf;

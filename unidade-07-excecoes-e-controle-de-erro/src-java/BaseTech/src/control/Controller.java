@@ -2,6 +2,7 @@ package control;
 
 import model.*;
 import model.estagiario.Estagiario;
+import model.exception.CpfCadastradoException;
 import model.funcionario.Funcionario;
 import model.funcionario.FuncionarioAutenticavel;
 import model.tipo.Tipo;
@@ -22,21 +23,22 @@ public class Controller {
             si.cadastrar(f.getCpf(), (Autenticavel) f);
         }
     }
-    public boolean cadastrarFuncionario(String nome, double salario, String cpf){
-        if(this.funcionarioMap.containsKey(cpf)) return false;
+    public void cadastrarFuncionario(String nome, double salario, String cpf){
+        if(this.funcionarioMap.containsKey(cpf)){
+            throw new CpfCadastradoException(cpf);
+        }
         this.cadastrarFuncionario(new Funcionario(nome,salario,cpf));
-        return true;
     }
     public boolean cadastrarEstagiario(String nome, String email, double bolsa){
         if(this.remuneravelMap.containsKey(email)) return false;
         this.remuneravelMap.put(email,new Estagiario(nome,email,bolsa));
         return true;
     }
-    public boolean cadastrarFuncionarioAutenticavel(String nome, double salario, String cpf){
-        if(this.funcionarioMap.containsKey(cpf)) return false;
-
-        this.cadastrarFuncionario(new FuncionarioAutenticavel(nome,salario,cpf));
-        return true;
+    public void cadastrarFuncionarioAutenticavel(String nome, double salario, String cpf){
+        if(this.funcionarioMap.containsKey(cpf)){
+            throw new CpfCadastradoException(cpf);
+        }
+       this.cadastrarFuncionario(new FuncionarioAutenticavel(nome,salario,cpf));
     }
 
     public String adicionarTipo(String chave, Tipo t){
