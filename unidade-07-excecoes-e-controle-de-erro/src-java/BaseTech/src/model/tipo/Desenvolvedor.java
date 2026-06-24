@@ -1,5 +1,7 @@
 package model.tipo;
 
+import model.exception.NivelMaximoException;
+
 public class Desenvolvedor implements Tipo {
 
     private Nivel nivel;
@@ -19,6 +21,9 @@ public class Desenvolvedor implements Tipo {
     }
 
     public void promover(){
+        if(this.nivel == Nivel.SENIOR){
+            throw new NivelMaximoException(this.getDescricao());
+        }
         if(this.nivel == Nivel.JUNIOR)this.nivel = Nivel.PLENO;
         else this.nivel = Nivel.SENIOR;
     }

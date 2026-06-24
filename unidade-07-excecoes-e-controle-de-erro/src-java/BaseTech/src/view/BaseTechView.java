@@ -84,17 +84,17 @@ public class BaseTechView {
             case 2:
                 System.out.print("CPF: ");
                 cpf = teclado.nextLine();
-                System.out.println(control.adicionarTipo(cpf, new Desenvolvedor(Nivel.JUNIOR)));
+                control.adicionarTipo(cpf, new Desenvolvedor(Nivel.JUNIOR));
                 break;
             case 3:
                 System.out.print("CPF: ");
                 cpf = teclado.nextLine();
-                System.out.println(control.adicionarTipo(cpf, new AnalistaSuporte(50)));
+                control.adicionarTipo(cpf, new AnalistaSuporte(50));
                 break;
             case 4:
                 System.out.print("CPF: ");
                 cpf = teclado.nextLine();
-                System.out.println(control.adicionarTipo(cpf, new GerenteProjeto()));
+                control.adicionarTipo(cpf, new GerenteProjeto());
                 break;
             case 5:
                 System.out.println("Folha de pagamento: R$ " + String.format("%.2f", control.getFolha()));
@@ -125,6 +125,10 @@ public class BaseTechView {
                    System.out.println(e.getMessage());
                }
                 break;
+            case 11:
+                System.out.print("CPF: ");
+                control.promoverDesenvolvedor(teclado.nextLine());
+                break;
             case 0:
                 System.out.println("Você escolheu sair do sistema!");
                 break;
@@ -151,6 +155,7 @@ public class BaseTechView {
         System.out.println("8- Registrar atendimento de chamado.");
         System.out.println("9- Realizar login.");
         System.out.println("10 - Cadastrar Estagiário.");
+        System.out.println("11 - Promover desenvolvedor.");
         System.out.println("0- Sair do sistema.");
         System.out.print("Opção: ");
 
@@ -166,8 +171,6 @@ public class BaseTechView {
         }
         System.out.print("Bolsa: ");
         double b = Double.parseDouble(teclado.nextLine());
-        if (!control.cadastrarEstagiario(nome, email, b)) {
-            throw new IllegalArgumentException("Estagiário já cadastrado.");
-        }
+        control.cadastrarEstagiario(nome, email, b);
     }
 }

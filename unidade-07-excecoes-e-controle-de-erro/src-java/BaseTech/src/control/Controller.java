@@ -2,9 +2,12 @@ package control;
 
 import model.*;
 import model.estagiario.Estagiario;
-import model.exception.CpfCadastradoException;
+import model.exception.ChaveJaCadastradaException;
+import model.exception.FuncionarioNaoLocalizadoException;
+import model.exception.TipoNaoPermitidoException;
 import model.funcionario.Funcionario;
 import model.funcionario.FuncionarioAutenticavel;
+import model.tipo.Desenvolvedor;
 import model.tipo.Tipo;
 
 import java.util.HashMap;
@@ -23,30 +26,39 @@ public class Controller {
             si.cadastrar(f.getCpf(), (Autenticavel) f);
         }
     }
+
     public void cadastrarFuncionario(String nome, double salario, String cpf){
         if(this.funcionarioMap.containsKey(cpf)){
-            throw new CpfCadastradoException(cpf);
+            throw new ChaveJaCadastradaException(cpf, "CPF");
         }
         this.cadastrarFuncionario(new Funcionario(nome,salario,cpf));
     }
-    public boolean cadastrarEstagiario(String nome, String email, double bolsa){
-        if(this.remuneravelMap.containsKey(email)) return false;
-        this.remuneravelMap.put(email,new Estagiario(nome,email,bolsa));
-        return true;
-    }
+
     public void cadastrarFuncionarioAutenticavel(String nome, double salario, String cpf){
         if(this.funcionarioMap.containsKey(cpf)){
-            throw new CpfCadastradoException(cpf);
+            throw new ChaveJaCadastradaException(cpf, "CPF");
         }
-       this.cadastrarFuncionario(new FuncionarioAutenticavel(nome,salario,cpf));
+        this.cadastrarFuncionario(new FuncionarioAutenticavel(nome,salario,cpf));
     }
 
-    public String adicionarTipo(String chave, Tipo t){
-        if(this.funcionarioMap.get(chave) instanceof FuncionarioAutenticavel){
-            this.funcionarioMap.get(chave).adicionarTipo(t);
-            return "Funcionário " + funcionarioMap.get(chave).getNome() + " definido como " + t.getDescricao();
+    public void cadastrarEstagiario(String nome, String email, double bolsa){
+
+        if(this.remuneravelMap.containsKey(email)){
+            throw new ChaveJaCadastradaException(email, "E-mail");
         }
-        return "Não foi possível definir o funcionário " + funcionarioMap.get(chave).getNome() + " como " + t.getDescricao();
+        this.remuneravelMap.put(email,new Estagiario(nome,email,bolsa));
+    }
+
+
+    public void adicionarTipo(String chave, Tipo t){
+        Funcionario f = funcionarioMap.get(chave);
+        if(f == null) throw new FuncionarioNaoLocalizadoException(chave);
+
+        if(!(f instanceof FuncionarioAutenticavel)){
+            throw new TipoNaoPermitidoException(f.getNome());
+        }
+        f.adicionarTipo(t);
+
     }
     public double getFolha(){
         double total = 0;
@@ -82,5 +94,17 @@ public class Controller {
     public String login(String usuario, String senha){
         if(si.login(usuario, senha)) return "Login realizado!";
         return "Usuário ou senha incorretos!";
+    }
+
+    public void promoverDesenvolvedor(String cpf){
+        Funcionario f = funcionarioMap.get(cpf);
+        if(f == null) throw new FuncionarioNaoLocalizadoException(cpf);
+
+        for(Tipo t : f.getTipos()){
+            if (t.getDescricao().equals("Desenvolvedor")){
+                Desenvolvedor d = (Desenvolvedor) t;
+                d.promover();
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@ import model.exception.ValorInvalidoException;
 import model.tipo.AnalistaSuporte;
 import model.Remuneravel;
 import model.tipo.Tipo;
+import util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,8 @@ public class Funcionario implements Remuneravel {
     private List<Tipo> tipos = new ArrayList<>();
 
     public Funcionario(String nome, double salario, String cpf){
-        if(salario < 0 ){
-            throw new ValorInvalidoException("Salário",salario);
+        if(salario < Util.SALARIOMINIMO ){
+            throw new ValorInvalidoException("Salário",Util.SALARIOMINIMO, salario);
         }
         this.nome = nome;
         this.salario = salario;
@@ -66,6 +67,10 @@ public class Funcionario implements Remuneravel {
 
     public String getCpf() {
         return cpf;
+    }
+
+    public List<Tipo> getTipos() {
+        return tipos;
     }
 
     @Override
